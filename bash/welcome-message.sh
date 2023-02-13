@@ -24,9 +24,20 @@ hostname="pc200510130"
 ###############
 # Main        #
 ###############
+###############
+# Variables   #
+###############
+day="any day"
+date="any date"
+
+###############
+# Main        #
+###############
+
 cat <<EOF
 
 Welcome to planet $hostname, "$title $myname!"
+It is $day at $date.
 
 EOF
 
