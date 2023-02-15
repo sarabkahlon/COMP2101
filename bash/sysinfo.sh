@@ -11,7 +11,7 @@ B=$(hostname -I | awk '{print $1}')
 cat << EOF
 Report for myvm
 ===============
-FQDN: $(hostname -f)
+FQDN: $(hostname)
 Operating System name and version: $A
 IP Address: $B
 Root Filesystem Free Space: $C	
