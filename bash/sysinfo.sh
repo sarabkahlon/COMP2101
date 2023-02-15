@@ -1,13 +1,19 @@
 #!/bin/bash
 #The purpose of this script is to display some important identity information about a computer 
 
-echo "Report for $(hostname)" 
-echo "==============="
-echo "FQDN:""`hostname`"
-echo "Operating System name and version:""`lsb_release -d | awk '{print $2,$3,$4}'`"
-#this script is used to display  operating system name and version tha only have only the distro name and version.
-echo "IP addresses:""`hostname -I | awk '{print $1}'`"
-echo "Root Filesystem Free Space: ""`df -h / | awk '{print $4}' | grep -v Avail`"
-#this script is used to display  Only  free disk space number on the root filesystem space line
-echo "==============="
+C=$(df -h / |grep Avail -v |awk '{print $4}')
 
+A=$(lsb_release -d | awk '{print $2,$3,$4}')
+
+B=$(hostname -I | awk '{print $1}')
+
+
+cat << EOF
+Report for myvm
+===============
+FQDN: $(hostname -f)
+Operating System name and version: $A
+IP Address: $B
+Root Filesystem Free Space: $C	
+===============
+EOF
