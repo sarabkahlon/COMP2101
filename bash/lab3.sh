@@ -26,7 +26,7 @@ fi
 
 #task4:add or update the entry in /etc/hosts for hostname COMP2101-S22 with the container’s current IP address
 if [ "grep -q COMP2101-S22 /etc/hosts >/dev/null" ];then
-      echo "COMP2101-S22 host entry updated"
+      echo "COMP2101-S22 host entry is already updated"
 else
       echo "Adding COMP2101-S22 entry in hosts file"
       echo "$IP COMP2101-S22" | sudo gedit /etc/hosts
@@ -42,9 +42,9 @@ fi
 
 #task6:  retrieve the default web page from the container’s web service with curl http://COMP2101-S22 and notify the user of success or failure
 if [ "curl http://COMP2101-S22 >/dev/null" ];then
-      echo "the default web page is successfully retrieve"
+      echo "the default web page is successfully retrieved"
 else
-      echo "error exists"
+      echo "error exists default web page is not able to retrieve"
 fi 
 
 
