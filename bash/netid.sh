@@ -22,7 +22,7 @@
 
 verbose="no"
 interface=""
-if [ $? -ne 0 ];then
+while [ $# -gt 0 ]; do
    option="$1"
 case $option in
     -v)
@@ -35,7 +35,7 @@ case $option in
 
   shift
 
-fi
+done
 
 
 
@@ -98,10 +98,8 @@ EOF
 
 # define the interface being summarized
 #interface="eno1"
-for interface in "$@"; do
-    if [ $interface == "-v" ]; then
-        continue
-    fi
+for interface in $interfaces; do
+     [ "$interface" = "-v" ]  && continue 
 
 
 [ "$verbose" = "yes" ] && echo "Reporting on interface(s): $interface"
