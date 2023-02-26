@@ -22,14 +22,20 @@
 
 verbose="no"
 interface=""
+
 while [ $# -gt 0 ]; do
-   option="$1"
-case $option in
+case $1 in
     -v)
         verbose="yes" ;;
 
     *)
-        interface="$1";;
+      if [ $? -ne 0 ]; then
+           interface="$1"
+      else
+        echo "usage: $0 [-v] [interface]" >&2
+        exit 1
+      fi
+      ;;
 
     esac
 
@@ -43,7 +49,7 @@ done
 
 
 # TASK 2: Dynamically identify the list of interface names for the computer running the script, and use a for loop to generate the report for every interface except loopback - do not include loopback network information in your output
-interfaces=$(ip link | awk -F: '$0 !~ "lo|vir|wl|^[^0-9]"{print $2}')
+interface_lists=$(ip -o link show | awk -F': ' '{if ($2 != "lo" ) {print $2}}')
 
 ################
 # Data Gathering
@@ -98,9 +104,8 @@ EOF
 
 # define the interface being summarized
 #interface="eno1"
-for interface in $interfaces; do
-     [ "$interface" = "-v" ]  && continue 
-
+for interface in $interfaces
+do 
 
 [ "$verbose" = "yes" ] && echo "Reporting on interface(s): $interface"
 
@@ -129,6 +134,7 @@ Network Address : $network_address
 Network Name    : $network_name
 
 EOF
+done
 #####
 # End of per-interface report
 #####
