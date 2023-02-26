@@ -41,7 +41,7 @@ else
 fi
 
 #task6:  retrieve the default web page from the container’s web service with curl http://COMP2101-S22 and notify the user of success or failure
-if [ "curl http://COMP2101-S22 >/dev/null" ];then
+if [ "curl -s -o http://COMP2101-S22 >/dev/null" ];then
       echo "the default web page is successfully retrieved"
 else
       echo "error exists default web page is not able to retrieve"
