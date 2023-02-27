@@ -63,7 +63,7 @@ interface_lists=$(ip -o link show | grep -v "lo:" | awk '{print $2}')
 #####
 [ "$verbose" = "yes" ] && echo "Gathering host information"
 # we use the hostname command to get our system name and main ip address
-my_hostname="$(hostname) / $(hostname -I)"
+my_hostname="$(hostname) / $(hostname -I | awk '{print $1}' )"
 
 [ "$verbose" = "yes" ] && echo "Identifying default route"
 # the default route can be found in the route table normally
