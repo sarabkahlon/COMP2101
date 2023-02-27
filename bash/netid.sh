@@ -49,7 +49,7 @@ done
 
 
 # TASK 2: Dynamically identify the list of interface names for the computer running the script, and use a for loop to generate the report for every interface except loopback - do not include loopback network information in your output
-interface_lists=$(ip -o link show | awk -F': ' '{if ($2 != "lo" ) {print $2}}')
+interface_lists=$(ip -o link show | grep -v "lo:" | awk '{print $2}')
 
 ################
 # Data Gathering
