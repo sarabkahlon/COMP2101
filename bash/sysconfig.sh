@@ -26,7 +26,10 @@ function cleanup {
   exit 1;
 }
 
-trap 'error-message "Execution interrupted, exiting the program, please wait..."; cleanup;' INT;
+function exit_program {
+   error-message "Execution interrupted, exiting the program, please wait..."; cleanup
+}
+trap exit_program INT
 
 # This function will send a message to stderr and exit with a failure status
 # Usage:
@@ -40,15 +43,15 @@ function error-exit {
 function displayhelp {
   cat << EOF
   Usage: ./sysconfig.sh [options]
-  -h | --help  display regarding various options and their usage
+  -h | --help  display  all kind of help
   --host       get hostname
   --domain     get domain name
-  -ipconfig    get IP related information
+  -ipconfig    display IP related information
   --os         get operating system related information
-  --cpu        get CPU related information
+  --cpu        display CPU related information
   --memory     get memory related information
-  --disk       get disk related information
-  --printer    get printer related information
+  --disk       display disk related information
+  --printer    display printer related information
 EOF
 }
 
